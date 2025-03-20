@@ -1,0 +1,13 @@
+import{a as y,S as g,i}from"./assets/vendor-5l-LjSpL.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))a(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const s of t.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&a(s)}).observe(document,{childList:!0,subtree:!0});function o(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function a(e){if(e.ep)return;e.ep=!0;const t=o(e);fetch(e.href,t)}})();const m="https://pixabay.com/api/",h="49327734-00ffb8023b77f666b7f6e293e";function L(n){const r={key:h,q:n,image_type:"photo",orientation:"horizontal",safesearch:!0};return y.get(m,{params:r}).then(o=>o.data.hits).catch(o=>{throw o})}function b(){const n=document.querySelector(".gallery");n.innerHTML=""}function l(){document.querySelector(".loader").classList.add("visually-hidden")}function S(){document.querySelector(".loader").classList.remove("visually-hidden")}function q(n){const r=document.querySelector(".gallery");l();const o=n.map(({webformatURL:e,largeImageURL:t,tags:s,likes:u,views:d,comments:p,downloads:f})=>`
+          <li class="gallery-item">
+            <a class="gallery-link" href="${t}">
+              <img class="gallery-image" src="${e}" alt="${s}" width="360" height="200" />
+            </a>
+            <div class="gallery-actions">
+              <p><span>Likes</span>${u}</p>
+              <p><span>Views</span> ${d}</p>
+              <p><span>Comments</span> ${p}</p>
+              <p><span>Downloads</span> ${f}</p>
+            </div>
+          </li>`).join("");r.innerHTML=o,new g(".gallery a").refresh()}const c=document.querySelector("form"),w=document.querySelector("input[name='search-text']");document.querySelector(".gallery");document.querySelector(".loader");c.addEventListener("submit",n=>{n.preventDefault();const r=w.value.trim();if(r===""){i.show({title:"Error",message:"Please enter a search query!",position:"topRight",backgroundColor:"#ef7975"});return}b(),S(),L(r).then(o=>{if(l(),o.length===0){i.show({title:"Error",message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight",backgroundColor:"#ef7975"});return}q(o)}).catch(()=>{l(),i.show({title:"Error",message:"Something went wrong! Please try again later.",position:"topRight",backgroundColor:"#ef7975"})}).finally(()=>{c.reset()})});
+//# sourceMappingURL=index.js.map
