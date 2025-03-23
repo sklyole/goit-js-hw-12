@@ -1,25 +1,25 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+// import iziToast from 'izitoast';
+// import 'izitoast/dist/css/iziToast.min.css';
+
+let lightbox = new SimpleLightbox('.gallery a');
 
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = '';
 }
-
 export function hideLoader() {
   document.querySelector('.loader').classList.add('visually-hidden');
 }
-
 export function showLoader() {
   document.querySelector('.loader').classList.remove('visually-hidden');
 }
 
 export function renderGallery(images) {
   const gallery = document.querySelector('.gallery');
-  hideLoader();
+
   const galleryMarkup = images
     .map(
       ({
@@ -47,8 +47,7 @@ export function renderGallery(images) {
     )
     .join('');
 
-  gallery.innerHTML = galleryMarkup;
+  gallery.innerHTML += galleryMarkup;
 
-  const lightbox = new SimpleLightbox('.gallery a');
   lightbox.refresh();
 }
